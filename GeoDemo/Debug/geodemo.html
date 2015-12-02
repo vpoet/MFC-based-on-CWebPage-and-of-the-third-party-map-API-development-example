@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<style type="text/css">
+body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+#r-result{height:100%;width:20%;float:left;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=uQmooGG28qG9xGH9BjXOuPkc"></script>
+<title>百度地图的Hello, World</title>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+var map = new BMap.Map("allmap");  
+map.centerAndZoom(new BMap.Point(104.071216,30.666031), 12);
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+map.addControl(new BMap.NavigationControl());                                 
+map.addControl(new BMap.OverviewMapControl());
+map.addControl(new BMap.ScaleControl());                
+map.enableScrollWheelZoom();                           
+map.addControl(new BMap.MapTypeControl());
+
+var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+
+
+function justmarkfun(JD,WD)
+{
+	var marker1 = new BMap.Marker(new BMap.Point(JD,WD));  // 创建标注
+	window.map.addOverlay(marker1);              // 将标注添加到地图中
+}
+</script>

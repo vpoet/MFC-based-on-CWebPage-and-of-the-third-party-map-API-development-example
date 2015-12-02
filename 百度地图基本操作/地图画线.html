@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<style type="text/css">
+body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+#r-result{height:100%;width:20%;float:left;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+<title>百度地图的Hello, World</title>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+var map = new BMap.Map("allmap");
+map.centerAndZoom("重庆",12);                   // 初始化地图,设置城市和地图级别。
+var pointA = new BMap.Point(106.486654,29.490295);  // 创建点坐标A--大渡口区
+var pointB = new BMap.Point(106.581515,29.615467);  // 创建点坐标B--江北区
+alert('从大渡口区到江北区的距离是：'+map.getDistance(pointA,pointB)+' 米。');//获取2点距离
+var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5});  //定义折线
+map.addOverlay(polyline);   //添加折线到地图上
+</script>

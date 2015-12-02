@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<style type="text/css">
+body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+#r-result{height:100%;width:20%;float:left;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.4"></script>
+<title>百度地图的Hello, World</title>
+</head>
+<body>
+<div id="allmap"></div>
+</body>
+</html>
+<script type="text/javascript">
+var map = new BMap.Map("allmap");
+map.centerAndZoom(new BMap.Point(108.961605,34.238296), 14);
+map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+
+
+var pt = new BMap.Point(108.961605,34.238296);
+var myIcon = new BMap.Icon("C:\Users\Administrator\Desktop\1.png", new BMap.Size(300,157));//自己要添加的路径
+var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+map.addOverlay(marker2);              // 将标注添加到地图中
+
+
+var infoWindow2 = new BMap.InfoWindow("<p style='font-size:14px;'>哈哈，你看见我啦！我可不常出现哦！</p><p style='font-size:14px;'>赶快查看源代码，看看我是如何添加上来的！</p>");
+
+marker2.addEventListener("click", function(){this.openInfoWindow(infoWindow2);});
+</script>

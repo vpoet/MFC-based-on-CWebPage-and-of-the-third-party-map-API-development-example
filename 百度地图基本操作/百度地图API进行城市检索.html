@@ -1,0 +1,94 @@
+<title>批量获取模糊搜索地址名称及坐标</title>
+
+<meta name="Keywords" content="批量,获取坐标,模糊搜索">
+
+<meta name="Description" content="本网页提供了批量搜索地名并返回地址及坐标的功能！">
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+
+</head>
+
+<body>
+    
+	<P>搜索城市<input id="txtCity" type="text" value="北京市" /></n>
+
+        <p>地名关键词<input id="txtSearch" type="text" value="肯德基" />
+    
+        <input type="button" value="生成坐标序列" onclick="search()" /> </n>
+    
+        <p>显示结果<textarea id="txtResult" rows="10" cols="100" value="" />
+    </textarea>
+    
+        <div id="divMap" style="display:none"></div>
+    
+        <script type="text/javascript">
+    
+	function $(id)
+	{
+        
+		return document.getElementById(id);//定义$,以便调用
+    
+	}
+    
+	var now=new Date();
+    
+	var map = new BMap.Map("divMap");//创建地图
+
+	function search(){
+
+		        $("txtResult").value="";
+		
+        map.clearOverlays(); //清除地图上所有标记
+        
+			var c=$("txtCity").value;
+      		        var ls = new BMap.LocalSearch(c,{renderOptions:{map:map,selectFirstResult:false,autoViewport:false}});
+ 
+		        ls.setPageCapacity(100);
+       
+		        var s=$("txtSearch").value;
+        
+                        ls.search(s); 
+       
+                        var i=1;
+        
+        
+
+
+			ls.setSearchCompleteCallback(function(rs)
+			{
+            
+				if (ls.getStatus() == BMAP_STATUS_SUCCESS)
+				{
+
+	                       	 	var str ="";
+     
+
+               
+                    				for(j=0;j<rs.getCurrentNumPois();j++)
+                    
+					{
+                       
+					 	var poi=rs.getPoi(j);                        
+                        
+					 	str +='(' + i + ',' + j +  ')' + poi.title+":" +poi.point.lng+","+poi.point.lat+'\n';
+ 
+	                       		 }
+                                   
+					$("txtResult").value+= str 
+                                      					if(rs.getPageIndex!=rs.getNumPages())  
+                 
+					{
+                        
+						ls.gotoPage(i);
+                        
+						i=i+1;
+                   
+				 	}    
+            
+				}
+       			 });}
+    
+	</script>
+
+</body>
+
+</html>
